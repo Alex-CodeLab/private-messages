@@ -5,8 +5,8 @@ from .models import Conversation
 
 def conversations(request):
     conversations  = Conversation.objects.filter()
-    print(conversations)
-    return render(request, 'private_messages.html',{'conversations': conversations})
+    contacts  = Conversation.objects.filter(users=request.user).values_list('users__username').distinct()
+    return render(request, 'private_messages.html',{'contacts': contacts, 'conversations': conversations})
 
 
 def conversation(request):

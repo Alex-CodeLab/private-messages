@@ -15,10 +15,10 @@ class Conversation(models.Model):
 
 class PrivateMessage(models.Model):
     conversation = models.ForeignKey(Conversation, on_delete=models.CASCADE)
-    text    = models.TextField('text')
-    persona = models.ForeignKey(User, related_name='persona', on_delete=models.CASCADE)
-    personb = models.ForeignKey(User, related_name='personb', on_delete=models.CASCADE)
+    text     = models.TextField('text')
+    sender   = models.ForeignKey(User, related_name='sender', on_delete=models.CASCADE, default='')
+    receiver = models.ForeignKey(User, related_name='receiver', on_delete=models.CASCADE, default='')
     create_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.text[0:40]
+        return self.text
